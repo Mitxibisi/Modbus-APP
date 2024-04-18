@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
 from modbus_tk import modbus_tcp
+import requests
+from io import BytesIO
 
 def agregar_texto(text_widget, texto):
     text_widget.insert(tk.END, texto + "\n")
@@ -158,15 +160,16 @@ style.configure("BOOL.TLabel",
 
 
 
-image_path = "E:\\IMG_20240412_122837.jpg"
-image = Image.open(image_path)
+url = "https://fotografias.lasexta.com/clipping/cmsimages02/2020/09/21/86828440-B1FB-43AC-9E9C-A94AC6A4B8BD/default.jpg?crop=1300,731,x0,y0&width=1900&height=1069&optimize=low"
+response = requests.get(url)
+image = Image.open((BytesIO(response.content)))
 width, height = 620, 510  # Nuevas dimensiones de la imagen (cambia según sea necesario)
 image = image.resize((width, height),Image.Resampling.LANCZOS )
 photo = ImageTk.PhotoImage(image)
 
-image_path1 = "E:\\08a9b98b23e992e872bdb0d2199395a5.png"
-image1= Image.open(image_path1)
-
+url1 = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/603px-Amazon_logo.svg.png"
+response1 = requests.get(url1)
+image1 = Image.open((BytesIO(response1.content)))
 image1 = image1.resize((600, 200),Image.Resampling.LANCZOS )
 photo1 = ImageTk.PhotoImage(image1)
 
@@ -350,7 +353,7 @@ boton_3 = ttk.Button(esc, text="REARME")
 boton_3.grid(row=9, column=4, padx=5, sticky="nesw")
 boton_cerrar = ttk.Button(esc, text="EXIT", command=parar)
 boton_cerrar.grid(row=10, column=4, padx=4, sticky="nesw")
-Rex = tk.Button(esc4,text= "prueba",command=borrarlista)
+Rex = ttk.Button(esc4,text= "RECONOCER ALARMAS",command=borrarlista)
 Rex.grid(row=1,column=0,sticky="nesw")
 
 
