@@ -93,24 +93,27 @@ panel.add(esc2, text="Planta")
 panel.add(esc4, text="Alarmas")
 panel.add(esc5, text="Comentarios")
 
-esc = ttk.Frame(esc1)
+esc = ttk.Frame(esc1,style="Marco1.TFrame")
 esc.pack(padx=1,pady=1,fill="both",
          expand=True)
 
-esc3 = ttk.Frame(esc)
-esc3.grid(row=1, column=4,
-          rowspan=3)
+esc3 = ttk.Frame(esc,style="Marco.TFrame")
+esc3.grid(row=1, column=4)
 
 esc6 = ttk.Frame(esc,style="Marco.TFrame")
 esc6.grid(row=1, column=0,
-          rowspan=10, columnspan=2,
-          padx=5)
+          columnspan=4,
+          padx=5,pady=5)
 
 style = ttk.Style()
 style.configure("TButton",
                 background="black",
                 font=grande,
                 padding=4,
+                relief="raised")
+style.configure("Alarmas.TButton",
+                background="yellow",
+                font=grande,
                 relief="raised")
 style.configure("General.TLabel",
                 background="#AEB6BF",
@@ -145,18 +148,19 @@ style.configure("Direccion.TLabel",
                 padding=2,
                 borderwidth=2)
 style.configure("IMAGEN.TLabel")
-style.configure("Marco.TFrame",
-                borderwidth=4,
-                relief="sunken",
-                background="lightgrey")
-style.configure("Direccion.TFrame",
-                background="grey",
-                relief="sunken")
 style.configure("BOOL.TLabel",
                 background="#AEB6BF",
                 relief="sunken",
                 font=peque,
                 borderwidth=4)
+style.configure("Marco.TFrame",
+                borderwidth=4,
+                relief="sunken",
+                background="lightgrey")
+style.configure("Marco1.TFrame",
+                borderwidth=4,
+                relief="sunken",
+                background="#A6ACAF")
 
 
 
@@ -207,54 +211,54 @@ PORT.grid(row=1,column=0,sticky="nesw")
 
 # Defino las etiquetas bool en runtime
 dat1 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat1.grid(row=1, column=1, pady=5, padx=0, sticky="nesw")
+dat1.grid(row=1, column=1, pady=5, padx=5, sticky="nesw")
 dat2 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat2.grid(row=2, column=1, pady=5, padx=0, sticky="nesw")
+dat2.grid(row=2, column=1, pady=5, padx=5, sticky="nesw")
 dat3 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat3.grid(row=3, column=1, pady=5, padx=0, sticky="nesw")
+dat3.grid(row=3, column=1, pady=5, padx=5, sticky="nesw")
 dat4 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat4.grid(row=4, column=1, pady=5, padx=0, sticky="nesw")
+dat4.grid(row=4, column=1, pady=5, padx=5, sticky="nesw")
 dat5 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat5.grid(row=5, column=1, pady=5, padx=0, sticky="nesw")
+dat5.grid(row=5, column=1, pady=5, padx=5, sticky="nesw")
 dat6 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat6.grid(row=6, column=1, pady=5, padx=0, sticky="nesw")
+dat6.grid(row=6, column=1, pady=5, padx=5, sticky="nesw")
 dat7 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat7.grid(row=7, column=1, pady=5, padx=0, sticky="nesw")
+dat7.grid(row=7, column=1, pady=5, padx=5, sticky="nesw")
 dat8 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat8.grid(row=8, column=1, pady=5, padx=0, sticky="nesw")
+dat8.grid(row=8, column=1, pady=5, padx=5, sticky="nesw")
 dat9 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat9.grid(row=9, column=1, pady=5, padx=0, sticky="nesw")
+dat9.grid(row=9, column=1, pady=5, padx=5, sticky="nesw")
 dat10 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat10.grid(row=10, column=1, pady=5, padx=0, sticky="nesw")
+dat10.grid(row=10, column=1, pady=5, padx=5, sticky="nesw")
 dat11 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat11.grid(row=1, column=3, pady=5, padx=0, sticky="nesw")
+dat11.grid(row=1, column=3, pady=5, padx=5, sticky="nesw")
 dat12 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat12.grid(row=2, column=3, pady=5, padx=0, sticky="nesw")
+dat12.grid(row=2, column=3, pady=5, padx=5, sticky="nesw")
 dat13 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat13.grid(row=3, column=3, pady=5, padx=0, sticky="nesw")
+dat13.grid(row=3, column=3, pady=5, padx=5, sticky="nesw")
 dat14 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat14.grid(row=4, column=3, pady=5, padx=0, sticky="nesw")
+dat14.grid(row=4, column=3, pady=5, padx=5, sticky="nesw")
 dat15 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat15.grid(row=5, column=3, pady=5, padx=0, sticky="nesw")
+dat15.grid(row=5, column=3, pady=5, padx=5, sticky="nesw")
 dat16 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat16.grid(row=6, column=3, pady=5, padx=0, sticky="nesw")
+dat16.grid(row=6, column=3, pady=5, padx=5, sticky="nesw")
 dat17 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat17.grid(row=7, column=3, pady=5, padx=0, sticky="nesw")
+dat17.grid(row=7, column=3, pady=5, padx=5, sticky="nesw")
 dat18 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat18.grid(row=8, column=3, pady=5, padx=0, sticky="nesw")
+dat18.grid(row=8, column=3, pady=5, padx=5, sticky="nesw")
 dat19 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat19.grid(row=9, column=3, pady=5, padx=0, sticky="nesw")
+dat19.grid(row=9, column=3, pady=5, padx=5, sticky="nesw")
 dat20 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat20.grid(row=10, column=3, pady=5, padx=0, sticky="nesw")
-dat21 = ttk.Label(esc6, text= "")
-dat21.grid(row=11, column=0, pady=5, padx=0, sticky="nesw")
-dat22 = ttk.Label(esc6, text= "")
-dat22.grid(row=11, column=1, pady=5, padx=0, sticky="nesw")
-dat23 = ttk.Label(esc6, text= "")
-dat23.grid(row=11, column=2, pady=5, padx=0, sticky="nesw")
+dat20.grid(row=10, column=3, pady=5, padx=5, sticky="nesw")
+dat21 = ttk.Label(esc6, text= "",style="General1.TLabel")
+dat21.grid(row=11, column=0, pady=5, padx=5, sticky="nesw")
+dat22 = ttk.Label(esc6, text= "",style="General1.TLabel")
+dat22.grid(row=11, column=1, pady=5, padx=5, sticky="nesw")
+dat23 = ttk.Label(esc6, text= "",style="General1.TLabel")
+dat23.grid(row=11, column=2, pady=5, padx=5, sticky="nesw")
 
 error = tk.Label(esc, text= "", width=25, bg= "lightgrey", relief= "sunken", bd=4)
-error.grid(row=11, column=0, pady=5, padx=2, columnspan=5, sticky="nesw")
+error.grid(row=4, column=0, pady=10, padx=2, columnspan=7, sticky="nesw")
 
 
 #Defino los nombres de las etiquetas
@@ -342,18 +346,18 @@ dt20.grid(row=10, column=2, pady=5, padx=8, sticky="nesw")
 
 # Defino los botones en runtime
 boton_con = ttk.Button(esc, text="Conectar",command=connectar)
-boton_con.grid(row=5, column=4, padx=4, sticky="nesw")
+boton_con.grid(row=3, column=0, padx=0, sticky="nesw")
 boton_desc = ttk.Button(esc, text="Desconectar",command=desconectar)
-boton_desc.grid(row=6, column=4, padx=4, sticky="nesw")
+boton_desc.grid(row=3, column=1, padx=0, sticky="nesw")
 boton_1 = ttk.Button(esc, text="MARCHA")
-boton_1.grid(row=7, column=4, padx=5, sticky="nesw")
+boton_1.grid(row=3, column=2, padx=0, sticky="nesw")
 boton_2 = ttk.Button(esc, text="PARO")
-boton_2.grid(row=8, column=4, padx=5, sticky="nesw")
+boton_2.grid(row=3, column=3, padx=0, sticky="nesw")
 boton_3 = ttk.Button(esc, text="REARME")
-boton_3.grid(row=9, column=4, padx=5, sticky="nesw")
+boton_3.grid(row=3, column=4, padx=0, sticky="nesw")
 boton_cerrar = ttk.Button(esc, text="EXIT", command=parar)
-boton_cerrar.grid(row=10, column=4, padx=4, sticky="nesw")
-Rex = ttk.Button(esc4,text= "RECONOCER ALARMAS",command=borrarlista)
+boton_cerrar.grid(row=3, column=5, padx=0, sticky="nesw")
+Rex = ttk.Button(esc4,text= "RECONOCER ALARMAS",command=borrarlista,style="Alarmas.TButton")
 Rex.grid(row=1,column=0,sticky="nesw")
 
 
@@ -361,4 +365,3 @@ Rex.grid(row=1,column=0,sticky="nesw")
 client = modbus_tcp.TcpMaster(host="192.168.1.145",port=502)
 
 root.mainloop()  # Ejecutar runtime
-

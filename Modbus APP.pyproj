@@ -11,6 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>Modbus APP</Name>
     <RootNamespace>Modbus APP</RootNamespace>
+    <IsWindowsApplication>True</IsWindowsApplication>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,6 +26,7 @@
     <Compile Include="Bool.py" />
     <Compile Include="hmi0.py" />
     <Compile Include="Modbus_APP.py" />
+    <Compile Include="web.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
