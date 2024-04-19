@@ -120,7 +120,9 @@ style.configure("TButton",
                 padding=4,
                 relief="raised")
 style.configure("Alarmas.TButton",
-                background="yellow",
+                background="black",
+                bordercolor="red",
+                foreground="black",
                 font=grande,
                 relief="raised")
 style.configure("General.TLabel",
