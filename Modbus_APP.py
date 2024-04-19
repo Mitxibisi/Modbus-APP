@@ -24,6 +24,7 @@ def connectar():
   except Exception as e:
     error.config(text="Error1: " + str(e), bg="red")
     agregar_texto(alarmas,f"Error2: {str(e)}")
+    alarmas.config(bg="red")
   
   finally:
     client.close()  # Asegurarnos de cerrar la conexión Modbus si hay un error
@@ -362,6 +363,6 @@ Rex.grid(row=1,column=0,sticky="nesw")
 
 
 # Definir el cliente Modbus
-client = modbus_tcp.TcpMaster(host="192.168.1.145",port=502)
+client = modbus_tcp.TcpMaster(host="192.168.1.31",port=502)
 
 root.mainloop()  # Ejecutar runtime
