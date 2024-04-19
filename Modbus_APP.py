@@ -4,6 +4,7 @@ from PIL import Image, ImageTk
 from modbus_tk import modbus_tcp
 import requests
 from io import BytesIO
+import Bool
 
 def agregar_texto(text_widget, texto):
     text_widget.insert(tk.END, texto + "\n")
@@ -44,19 +45,18 @@ def parar(): #Funcion para detener runtime
     
 def pedir_bool(): #Funcion para actualizar los datos en pantalla
     try:
-        valor = client.execute(slave=1, function_code= 1, starting_address= 0, quantity_of_x= 10) #Lee las bobinas correspondientes
-        v1, v2, v3, v4, v5, v6, v7, v8, v9, v10 = valor #Desglosa la lista de booleanos separandolos en diferentes variables
+        valor = client.execute(slave=1, function_code= 1, starting_address= 0, quantity_of_x= 10)  #Lee las bobinas correspondientes
     
-        dat1.config(text="True" if v1 else "False", style="OK.TLabel" if v1 else "Error.TLabel")
-        dat2.config(text="True" if v2 else "False", style="OK.TLabel" if v2 else "Error.TLabel")
-        dat3.config(text="True" if v3 else "False", style="OK.TLabel" if v3 else "Error.TLabel")
-        dat4.config(text="True" if v4 else "False", style="OK.TLabel" if v4 else "Error.TLabel")
-        dat5.config(text="True" if v5 else "False", style="OK.TLabel" if v5 else "Error.TLabel")
-        dat6.config(text="True" if v6 else "False", style="OK.TLabel" if v6 else "Error.TLabel")
-        dat7.config(text="True" if v7 else "False", style="OK.TLabel" if v7 else "Error.TLabel")
-        dat8.config(text="True" if v8 else "False", style="OK.TLabel" if v8 else "Error.TLabel")
-        dat9.config(text="True" if v9 else "False", style="OK.TLabel" if v9 else "Error.TLabel")
-        dat10.config(text="True" if v10 else "False", style="OK.TLabel" if v10 else "Error.TLabel")
+        dat1.config(text="True" if valor[0] else "False", style="OK.TLabel" if valor[0] else "Error.TLabel")
+        dat2.config(text="True" if valor[1] else "False", style="OK.TLabel" if valor[1] else "Error.TLabel")
+        dat3.config(text="True" if valor[2] else "False", style="OK.TLabel" if valor[2] else "Error.TLabel")
+        dat4.config(text="True" if valor[3] else "False", style="OK.TLabel" if valor[3] else "Error.TLabel")
+        dat5.config(text="True" if valor[4] else "False", style="OK.TLabel" if valor[4] else "Error.TLabel")
+        dat6.config(text="True" if valor[5] else "False", style="OK.TLabel" if valor[5] else "Error.TLabel")
+        dat7.config(text="True" if valor[6] else "False", style="OK.TLabel" if valor[6] else "Error.TLabel")
+        dat8.config(text="True" if valor[7] else "False", style="OK.TLabel" if valor[7] else "Error.TLabel")
+        dat9.config(text="True" if valor[8] else "False", style="OK.TLabel" if valor[8] else "Error.TLabel")
+        dat10.config(text="True" if valor[9] else "False", style="OK.TLabel" if valor[9] else "Error.TLabel")
     except Exception as e:
         error.config(text= str(e),bg="red")
         agregar_texto(alarmas,f"Error4: {str(e)}")
@@ -69,7 +69,7 @@ def pedir_bool(): #Funcion para actualizar los datos en pantalla
 def pedir_holding():
  try:
         # Leer valores de registros de retención
-        holding_register_values = client.execute(slave=1, function_code=4, starting_address=0, quantity_of_x=2)
+        holding_register_values = client.execute(slave=1, function_code=4, starting_address=0, quantity_of_x=20)
         
         # Actualizar etiquetas con los nuevos valores
         dat21.configure(text=holding_register_values[0])
@@ -383,6 +383,6 @@ Rex.grid(row=1,column=0,sticky="nesw")
 
 
 # Definir el cliente Modbus
-client = modbus_tcp.TcpMaster(host="192.168.1.31",port=502)
+client = modbus_tcp.TcpMaster(host="192.168.1.145",port=502)
 
 root.mainloop()  # Ejecutar runtime
