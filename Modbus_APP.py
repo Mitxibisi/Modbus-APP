@@ -45,7 +45,7 @@ def parar(): #Funcion para detener runtime
     
 def pedir_bool(): #Funcion para actualizar los datos en pantalla
     try:
-        valor = client.execute(slave=1, function_code= 1, starting_address= 0, quantity_of_x= 10)  #Lee las bobinas correspondientes
+        valor = client.execute(slave=1, function_code= 1, starting_address= 0, quantity_of_x= 20)  #Lee las bobinas correspondientes
     
         dat1.config(text="True" if valor[0] else "False", style="OK.TLabel" if valor[0] else "Error.TLabel")
         dat2.config(text="True" if valor[1] else "False", style="OK.TLabel" if valor[1] else "Error.TLabel")
