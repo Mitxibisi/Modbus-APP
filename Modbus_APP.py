@@ -25,6 +25,7 @@ def connectar():
     error.config(text="Error1: " + str(e), bg="red")
     agregar_texto(alarmas,f"Error2: {str(e)}")
     alarmas.config(bg="red")
+    panel.configure(style="Alarma.TNotebook.Tab")
   
   finally:
     client.close()  # Asegurarnos de cerrar la conexión Modbus si hay un error
@@ -55,13 +56,14 @@ def pedir_bool(): #Funcion para actualizar los datos en pantalla
         error.config(text= str(e),bg="red")
         agregar_texto(alarmas,f"Error4: {str(e)}")
         alarmas.config(bg="red")
+        panel.configure(style="Alarma.TNotebook.Tab")
 
     root.after(100, pedir_bool) 
 
 def pedir_holding():
  try:
         # Leer valores de registros de retención
-        holding_register_values = client.execute(slave=1, function_code=4, starting_address=0, quantity_of_x=10)
+        holding_register_values = client.execute(slave=1, function_code=4, starting_address=0, quantity_of_x=2)
         
         # Actualizar etiquetas con los nuevos valores
         dat21.configure(text=holding_register_values[0])
@@ -72,6 +74,7 @@ def pedir_holding():
         error.config(text= str(e),bg="red")
         agregar_texto(alarmas,f"Error5: {str(e)}")
         alarmas.config(bg="red")
+        panel.configure(style="Alarma.TNotebook.Tab")
 
     # Llamar a la función de actualización nuevamente después de un tiempo
  root.after(200, pedir_holding)
@@ -171,6 +174,8 @@ style.configure("Marco1.TFrame",
                 borderwidth=4,
                 relief="sunken",
                 background="#A6ACAF")
+style.configure("Alarmas.TNotebook.Tab",
+                foreground="red")
 
 
 

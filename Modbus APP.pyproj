@@ -11,7 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>Modbus APP</Name>
     <RootNamespace>Modbus APP</RootNamespace>
-    <IsWindowsApplication>True</IsWindowsApplication>
+    <IsWindowsApplication>False</IsWindowsApplication>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
