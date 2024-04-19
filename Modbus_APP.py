@@ -37,20 +37,25 @@ def parar(): #Funcion para detener runtime
     client.close()        
     
 def pedir_bool(): #Funcion para actualizar los datos en pantalla
-    valor = client.execute(slave=1, function_code= 1, starting_address= 0, quantity_of_x= 10) #Lee las bobinas correspondientes
-    v1, v2, v3, v4, v5, v6, v7, v8, v9, v10 = valor #Desglosa la lista de booleanos separandolos en diferentes variables
+    try:
+        valor = client.execute(slave=1, function_code= 1, starting_address= 0, quantity_of_x= 10) #Lee las bobinas correspondientes
+        v1, v2, v3, v4, v5, v6, v7, v8, v9, v10 = valor #Desglosa la lista de booleanos separandolos en diferentes variables
     
-    dat1.config(text="True" if v1 else "False", style="OK.TLabel" if v1 else "Error.TLabel")
-    dat2.config(text="True" if v2 else "False", style="OK.TLabel" if v2 else "Error.TLabel")
-    dat3.config(text="True" if v3 else "False", style="OK.TLabel" if v3 else "Error.TLabel")
-    dat4.config(text="True" if v4 else "False", style="OK.TLabel" if v4 else "Error.TLabel")
-    dat5.config(text="True" if v5 else "False", style="OK.TLabel" if v5 else "Error.TLabel")
-    dat6.config(text="True" if v6 else "False", style="OK.TLabel" if v6 else "Error.TLabel")
-    dat7.config(text="True" if v7 else "False", style="OK.TLabel" if v7 else "Error.TLabel")
-    dat8.config(text="True" if v8 else "False", style="OK.TLabel" if v8 else "Error.TLabel")
-    dat9.config(text="True" if v9 else "False", style="OK.TLabel" if v9 else "Error.TLabel")
-    dat10.config(text="True" if v10 else "False", style="OK.TLabel" if v10 else "Error.TLabel")
-    
+        dat1.config(text="True" if v1 else "False", style="OK.TLabel" if v1 else "Error.TLabel")
+        dat2.config(text="True" if v2 else "False", style="OK.TLabel" if v2 else "Error.TLabel")
+        dat3.config(text="True" if v3 else "False", style="OK.TLabel" if v3 else "Error.TLabel")
+        dat4.config(text="True" if v4 else "False", style="OK.TLabel" if v4 else "Error.TLabel")
+        dat5.config(text="True" if v5 else "False", style="OK.TLabel" if v5 else "Error.TLabel")
+        dat6.config(text="True" if v6 else "False", style="OK.TLabel" if v6 else "Error.TLabel")
+        dat7.config(text="True" if v7 else "False", style="OK.TLabel" if v7 else "Error.TLabel")
+        dat8.config(text="True" if v8 else "False", style="OK.TLabel" if v8 else "Error.TLabel")
+        dat9.config(text="True" if v9 else "False", style="OK.TLabel" if v9 else "Error.TLabel")
+        dat10.config(text="True" if v10 else "False", style="OK.TLabel" if v10 else "Error.TLabel")
+    except Exception as e:
+        error.config(text= str(e),bg="red")
+        agregar_texto(alarmas,f"Error4: {str(e)}")
+        alarmas.config(bg="red")
+
     root.after(100, pedir_bool) 
 
 def pedir_holding():
@@ -64,7 +69,9 @@ def pedir_holding():
         dat23.configure(text=holding_register_values[2])
 
  except Exception as e:
-        print("Error al actualizar valores:", e)
+        error.config(text= str(e),bg="red")
+        agregar_texto(alarmas,f"Error5: {str(e)}")
+        alarmas.config(bg="red")
 
     # Llamar a la función de actualización nuevamente después de un tiempo
  root.after(200, pedir_holding)
