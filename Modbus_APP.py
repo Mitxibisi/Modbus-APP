@@ -9,9 +9,13 @@ def agregar_texto(text_widget, texto):
     text_widget.insert(tk.END, texto + "\n")
 
 def borrarlista():
-	alarmas.delete("1.0",tk.END)
+    alarmas.delete("1.0",tk.END)
+    style.map("TNotebook.Tab",
+    foreground=[("!selected","black")])
+    alarmas.config(bg="lightgrey")
 
-def connectar():
+
+def conectar():
   try:
     # Intentar conectarse al servidor Modbus
     client.open()
@@ -25,7 +29,8 @@ def connectar():
     error.config(text="Error1: " + str(e), bg="red")
     agregar_texto(alarmas,f"Error2: {str(e)}")
     alarmas.config(bg="red")
-    panel.configure(style="Alarma.TNotebook.Tab")
+    style.map("TNotebook.Tab",
+              foreground=[("!selected","red")])
   
   finally:
     client.close()  # Asegurarnos de cerrar la conexión Modbus si hay un error
@@ -56,7 +61,8 @@ def pedir_bool(): #Funcion para actualizar los datos en pantalla
         error.config(text= str(e),bg="red")
         agregar_texto(alarmas,f"Error4: {str(e)}")
         alarmas.config(bg="red")
-        panel.configure(style="Alarma.TNotebook.Tab")
+        style.map("TNotebook.Tab",
+                  foreground=[("!selected","red")])
 
     root.after(100, pedir_bool) 
 
@@ -74,7 +80,8 @@ def pedir_holding():
         error.config(text= str(e),bg="red")
         agregar_texto(alarmas,f"Error5: {str(e)}")
         alarmas.config(bg="red")
-        panel.configure(style="Alarma.TNotebook.Tab")
+        style.map("TNotebook.Tab",
+                  foreground=[("!selected","red")])
 
     # Llamar a la función de actualización nuevamente después de un tiempo
  root.after(200, pedir_holding)
@@ -85,6 +92,7 @@ peque = ("Comic Sans", 10, "bold")
 peque1 = ("Arial Black", 8)
 peque2 = ("Comic Sans", 10, "bold")
 peque3 = ("Arial Black", 12)
+panel=("Helvatic",6,"bold")
 
 
 root = tk.Tk() # Pantalla
@@ -174,16 +182,14 @@ style.configure("Marco1.TFrame",
                 borderwidth=4,
                 relief="sunken",
                 background="#A6ACAF")
-style.configure("Alarmas.TNotebook.Tab",
-                foreground="red")
+style.configure("TNotebook.Tab",
+                font=panel)
 
 
-
-url = "https://fotografias.lasexta.com/clipping/cmsimages02/2020/09/21/86828440-B1FB-43AC-9E9C-A94AC6A4B8BD/default.jpg?crop=1300,731,x0,y0&width=1900&height=1069&optimize=low"
+url = "https://img.interempresas.net/fotos/4149029.jpeg"
 response = requests.get(url)
 image = Image.open((BytesIO(response.content)))
-width, height = 620, 510  # Nuevas dimensiones de la imagen (cambia según sea necesario)
-image = image.resize((width, height),Image.Resampling.LANCZOS )
+image = image.resize((870, 720),Image.Resampling.LANCZOS )
 photo = ImageTk.PhotoImage(image)
 
 url1 = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/603px-Amazon_logo.svg.png"
@@ -205,12 +211,12 @@ label.grid(row= 0 ,
 label1 = ttk.Label(esc2,
                    image=photo,
                    style="General.TLabel")
-label1.pack(padx=10,
-            pady=10)
+label1.pack(fill="both",
+            expand=True)
 
 
 text=tk.Text(esc5,height=30,bg="lightgrey")
-text.pack()
+text.pack( fill="both",expand=True)
 alarmas=tk.Text(esc4,height=30,bg="lightgrey",font=peque3)
 alarmas.grid(row=0,column=0,sticky="nesw")
 
@@ -360,7 +366,7 @@ dt20.grid(row=10, column=2, pady=5, padx=8, sticky="nesw")
 
 
 # Defino los botones en runtime
-boton_con = ttk.Button(esc, text="Conectar",command=connectar)
+boton_con = ttk.Button(esc, text="Conectar",command=conectar)
 boton_con.grid(row=3, column=0, padx=0, sticky="nesw")
 boton_desc = ttk.Button(esc, text="Desconectar",command=desconectar)
 boton_desc.grid(row=3, column=1, padx=0, sticky="nesw")
