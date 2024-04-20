@@ -4,7 +4,6 @@ from PIL import Image, ImageTk
 from modbus_tk import modbus_tcp
 import requests
 from io import BytesIO
-import Bool
 
 def agregar_texto(text_widget, texto):
     text_widget.insert(tk.END, texto + "\n")
@@ -383,6 +382,6 @@ Rex.grid(row=1,column=0,sticky="nesw")
 
 
 # Definir el cliente Modbus
-client = modbus_tcp.TcpMaster(host="192.168.1.145",port=502)
+client = modbus_tcp.TcpMaster(host="192.168.1.141",port=502)
 
 root.mainloop()  # Ejecutar runtime
