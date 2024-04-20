@@ -22,11 +22,16 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="antiguo.py" />
-    <Compile Include="Bool.py" />
-    <Compile Include="hmi0.py" />
+    <Compile Include="OLD\antiguo.py" />
+    <Compile Include="OLD\Bool.py" />
+    <Compile Include="OLD\hmi0.py" />
+    <Compile Include="cosas.py" />
     <Compile Include="Modbus_APP.py" />
-    <Compile Include="web.py" />
+    <Compile Include="OLD\web.py" />
+    <Compile Include="sinterminar.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="OLD\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

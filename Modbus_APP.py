@@ -1,9 +1,15 @@
+import ctypes
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
 from modbus_tk import modbus_tcp
 import requests
 from io import BytesIO
+import cosas
+
+def prueba(a):
+    #Añadir escalados
+    print("Hola")
 
 def agregar_texto(text_widget, texto):
     text_widget.insert(tk.END, texto + "\n")
@@ -85,6 +91,8 @@ def pedir_holding():
     # Llamar a la función de actualización nuevamente después de un tiempo
  root.after(200, pedir_holding)
 
+
+prueb=prueba(a=cosas.resolucion())
 
 grande = ("Arial", 12, "bold")
 peque = ("Comic Sans", 10, "bold")
@@ -382,6 +390,6 @@ Rex.grid(row=1,column=0,sticky="nesw")
 
 
 # Definir el cliente Modbus
-client = modbus_tcp.TcpMaster(host="192.168.1.141",port=502)
+client = modbus_tcp.TcpMaster(host="192.168.1.145",port=502)
 
 root.mainloop()  # Ejecutar runtime
