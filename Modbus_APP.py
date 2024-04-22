@@ -1,11 +1,9 @@
-import ctypes
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
 from modbus_tk import modbus_tcp
 import requests
 from io import BytesIO
-import cosas
 
 def agregar_texto(text_widget, texto):
     text_widget.insert(tk.END, texto + "\n")

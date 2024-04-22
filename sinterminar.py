@@ -1,6 +1,5 @@
 #Aqui seguira el programa sin terminar mientras que el Modbus_APP sera la version funcional
-#Aqui seguira el programa sin terminar mientras que el Modbus_APP sera la version funcional
-import ctypes
+
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
@@ -15,20 +14,21 @@ def prueba(a):
         esc.pack(padx=1,pady=1,fill="both",
          expand=True)
         esc6.grid(row=1, column=0,
-          columnspan=4,
-          padx=5,pady=5)
+          columnspan=6,
+          padx=5,pady=10)
         label.grid(row= 0 ,
            column = 0,
            padx=10,
           pady=10,
-          columnspan=5)
+          columnspan=6)
         label1.pack(fill="both",
             expand=True)
-        alarmas.grid(row=0,column=0,sticky="nesw")
+        alarmas.pack(fill="both",
+            expand=True)
         IP.pack()
         PORT.pack()
-        IP.pack()
-        PORT.pack()
+        IP1.pack()
+        PORT1.pack()
         dat1.grid(row=1, column=1, pady=5, padx=5, sticky="nesw")
         dat2.grid(row=2, column=1, pady=5, padx=5, sticky="nesw")
         dat3.grid(row=3, column=1, pady=5, padx=5, sticky="nesw")
@@ -52,7 +52,7 @@ def prueba(a):
         dat21.grid(row=11, column=0, pady=5, padx=5, sticky="nesw")
         dat22.grid(row=11, column=1, pady=5, padx=5, sticky="nesw")
         dat23.grid(row=11, column=2, pady=5, padx=5, sticky="nesw")
-        error.grid(row=4, column=0, pady=10, padx=2, columnspan=7, sticky="nesw")           
+        error.grid(row=4, column=0, pady=10, padx=2, columnspan=6, sticky="nesw")           
         dt1.grid(row=1, column=0, pady=5, padx=8, sticky="nesw")
         dt2.grid(row=2, column=0, pady=5, padx=8, sticky="nesw")
         dt3.grid(row=3, column=0, pady=5, padx=8, sticky="nesw")
@@ -73,13 +73,14 @@ def prueba(a):
         dt18.grid(row=8, column=2, pady=5, padx=8, sticky="nesw")
         dt19.grid(row=9, column=2, pady=5, padx=8, sticky="nesw")
         dt20.grid(row=10, column=2, pady=5, padx=8, sticky="nesw")
-        boton_con.grid(row=3, column=0, padx=0, sticky="nesw")
-        boton_desc.grid(row=3, column=1, padx=0, sticky="nesw")
-        boton_1.grid(row=3, column=2, padx=0, sticky="nesw")
-        boton_2.grid(row=3, column=3, padx=0, sticky="nesw")
-        boton_3.grid(row=3, column=4, padx=0, sticky="nesw")
-        boton_cerrar.grid(row=3, column=5, padx=0, sticky="nesw")
-        Rex.grid(row=1,column=0,sticky="nesw")
+        boton_con.grid(row=3, column=0, padx=5, sticky="nesw")
+        boton_desc.grid(row=3, column=1, padx=5, sticky="nesw")
+        boton_1.grid(row=3, column=2, padx=5, sticky="nesw")
+        boton_2.grid(row=3, column=3, padx=5, sticky="nesw")
+        boton_3.grid(row=3, column=4, padx=5, sticky="nesw")
+        boton_cerrar.grid(row=3, column=5, padx=5, sticky="nesw")
+        Rex.pack(fill="both",
+            expand=True)
     if a==2:
         print("nop")
               
@@ -289,8 +290,8 @@ alarmas=tk.Text(esc4,bg="lightgrey",font=peque3)
 
 IP = ttk.Entry(esc5)
 PORT = ttk.Entry(esc5)
-IP = ttk.Label(esc5,text="Direccion IP:",style="General.TLabel")
-PORT = ttk.Label(esc5,text="PUERTO:",style="General.TLabel")
+IP1= ttk.Label(esc5,text="Direccion IP:",style="General.TLabel")
+PORT1 = ttk.Label(esc5,text="PUERTO:",style="General.TLabel")
 
 
 
