@@ -7,10 +7,6 @@ import requests
 from io import BytesIO
 import cosas
 
-def prueba(a):
-    #Añadir escalados
-    print("Hola")
-
 def agregar_texto(text_widget, texto):
     text_widget.insert(tk.END, texto + "\n")
 
@@ -47,6 +43,11 @@ def desconectar():
 def parar(): #Funcion para detener runtime
     root.destroy()
     client.close()        
+def marcha():
+    client.execute(1, 5, 9, output_value=1)  # Escribir un valor de 1 en la bobina en el esclavo 1, en la dirección 1
+    
+def paro():
+    client.execute(1, 5, 9, output_value=0)  # Escribir un valor de 1 en la bobina en el esclavo 1, en la dirección 1
     
 def pedir_bool(): #Funcion para actualizar los datos en pantalla
     try:
@@ -92,19 +93,17 @@ def pedir_holding():
  root.after(200, pedir_holding)
 
 
-prueb=prueba(a=cosas.resolucion())
-
 grande = ("Arial", 12, "bold")
 peque = ("Comic Sans", 10, "bold")
 peque1 = ("Arial Black", 8)
 peque2 = ("Comic Sans", 10, "bold")
 peque3 = ("Arial Black", 12)
-panel=("Helvatic",6,"bold")
+panel=("Arial Black",6,"bold")
 
 
 root = tk.Tk() # Pantalla
 root.title("DASHBOARD")
-
+root.geometry("720x760")
 
 panel = ttk.Notebook(root)
 panel.pack()
@@ -117,25 +116,21 @@ esc5 = ttk.Frame(panel)
 panel.add(esc1, text="Supervision")
 panel.add(esc2, text="Planta")
 panel.add(esc4, text="Alarmas")
-panel.add(esc5, text="Comentarios")
+panel.add(esc5, text="Configuraciones")
 
 esc = ttk.Frame(esc1,style="Marco1.TFrame")
 esc.pack(padx=1,pady=1,fill="both",
          expand=True)
 
-esc3 = ttk.Frame(esc,style="Marco.TFrame")
-esc3.grid(row=1, column=4)
-
 esc6 = ttk.Frame(esc,style="Marco.TFrame")
 esc6.grid(row=1, column=0,
-          columnspan=4,
-          padx=5,pady=5)
+          columnspan=6,
+          padx=5,pady=10)
 
 style = ttk.Style()
 style.configure("TButton",
                 background="black",
                 font=grande,
-                padding=4,
                 relief="raised")
 style.configure("Alarmas.TButton",
                 background="black",
@@ -144,13 +139,13 @@ style.configure("Alarmas.TButton",
                 font=grande,
                 relief="raised")
 style.configure("General.TLabel",
-                background="#AEB6BF",
+                background="#CACFD2",
                 font=peque2,
                 relief="sunken",
                 padding=4,
                 borderwidth=4)
 style.configure("General1.TLabel",
-                background="#AEB6BF",
+                background="#CACFD2",
                 font=peque2,
                 relief="sunken",
                 padding=4,
@@ -175,7 +170,8 @@ style.configure("Direccion.TLabel",
                 relief="sunken",
                 padding=2,
                 borderwidth=2)
-style.configure("IMAGEN.TLabel")
+style.configure("IMAGEN.TLabel",
+                background="#A6ACAF")
 style.configure("BOOL.TLabel",
                 background="#AEB6BF",
                 relief="sunken",
@@ -184,7 +180,7 @@ style.configure("BOOL.TLabel",
 style.configure("Marco.TFrame",
                 borderwidth=4,
                 relief="sunken",
-                background="lightgrey")
+                background="#B3B6B7")
 style.configure("Marco1.TFrame",
                 borderwidth=4,
                 relief="sunken",
@@ -196,7 +192,7 @@ style.configure("TNotebook.Tab",
 url = "https://img.interempresas.net/fotos/4149029.jpeg"
 response = requests.get(url)
 image = Image.open((BytesIO(response.content)))
-image = image.resize((870, 720),Image.Resampling.LANCZOS )
+image = image.resize((710, 748),Image.Resampling.LANCZOS )
 photo = ImageTk.PhotoImage(image)
 
 url1 = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/603px-Amazon_logo.svg.png"
@@ -213,7 +209,7 @@ label.grid(row= 0 ,
            column = 0,
            padx=10,
           pady=10,
-          columnspan=5)
+          columnspan=6)
 
 label1 = ttk.Label(esc2,
                    image=photo,
@@ -221,20 +217,18 @@ label1 = ttk.Label(esc2,
 label1.pack(fill="both",
             expand=True)
 
+alarmas=tk.Text(esc4,bg="lightgrey",font=peque3)
+alarmas.pack(fill="both",
+            expand=True)
 
-text=tk.Text(esc5,height=30,bg="lightgrey")
-text.pack( fill="both",expand=True)
-alarmas=tk.Text(esc4,height=30,bg="lightgrey",font=peque3)
-alarmas.grid(row=0,column=0,sticky="nesw")
-
-IP = ttk.Entry(esc3)
-IP.grid(row=0,column=1,sticky="nesw")
-PORT = ttk.Entry(esc3)
-PORT.grid(row=1,column=1,sticky="nesw")
-IP = ttk.Label(esc3,text="Direccion IP:",style="General.TLabel")
-IP.grid(row=0,column=0,sticky="nesw")
-PORT = ttk.Label(esc3,text="PUERTO:",style="General.TLabel")
-PORT.grid(row=1,column=0,sticky="nesw")
+IP = ttk.Entry(esc5)
+IP.pack()
+PORT = ttk.Entry(esc5)
+PORT.pack()
+IP = ttk.Label(esc5,text="Direccion IP:",style="General.TLabel")
+IP.pack()
+PORT = ttk.Label(esc5,text="PUERTO:",style="General.TLabel")
+PORT.pack()
 
 
 # Defino las etiquetas bool en runtime
@@ -285,8 +279,8 @@ dat22.grid(row=11, column=1, pady=5, padx=5, sticky="nesw")
 dat23 = ttk.Label(esc6, text= "",style="General1.TLabel")
 dat23.grid(row=11, column=2, pady=5, padx=5, sticky="nesw")
 
-error = tk.Label(esc, text= "", width=25, bg= "lightgrey", relief= "sunken", bd=4)
-error.grid(row=4, column=0, pady=10, padx=2, columnspan=7, sticky="nesw")
+error = tk.Label(esc, text= "", bg= "lightgrey", relief= "flat", bd=4)
+error.grid(row=4, column=0, pady=5, padx=5, columnspan=6, sticky="nesw")
 
 
 #Defino los nombres de las etiquetas
@@ -374,19 +368,20 @@ dt20.grid(row=10, column=2, pady=5, padx=8, sticky="nesw")
 
 # Defino los botones en runtime
 boton_con = ttk.Button(esc, text="Conectar",command=conectar)
-boton_con.grid(row=3, column=0, padx=0, sticky="nesw")
+boton_con.grid(row=3, column=0, padx=5, sticky="nesw")
 boton_desc = ttk.Button(esc, text="Desconectar",command=desconectar)
-boton_desc.grid(row=3, column=1, padx=0, sticky="nesw")
-boton_1 = ttk.Button(esc, text="MARCHA")
-boton_1.grid(row=3, column=2, padx=0, sticky="nesw")
-boton_2 = ttk.Button(esc, text="PARO")
-boton_2.grid(row=3, column=3, padx=0, sticky="nesw")
+boton_desc.grid(row=3, column=1, padx=5, sticky="nesw")
+boton_1 = ttk.Button(esc, text="MARCHA",command=marcha)
+boton_1.grid(row=3, column=2, padx=5, sticky="nesw")
+boton_2 = ttk.Button(esc, text="PARO",command=paro)
+boton_2.grid(row=3, column=3, padx=5, sticky="nesw")
 boton_3 = ttk.Button(esc, text="REARME")
-boton_3.grid(row=3, column=4, padx=0, sticky="nesw")
+boton_3.grid(row=3, column=4, padx=5, sticky="nesw")
 boton_cerrar = ttk.Button(esc, text="EXIT", command=parar)
-boton_cerrar.grid(row=3, column=5, padx=0, sticky="nesw")
+boton_cerrar.grid(row=3, column=5, padx=5, sticky="nesw")
 Rex = ttk.Button(esc4,text= "RECONOCER ALARMAS",command=borrarlista,style="Alarmas.TButton")
-Rex.grid(row=1,column=0,sticky="nesw")
+Rex.pack(fill="both",
+            expand=True)
 
 
 # Definir el cliente Modbus
