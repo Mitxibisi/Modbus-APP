@@ -73,12 +73,12 @@ def pedir_bool(): #Funcion para actualizar los datos en pantalla
 def pedir_holding():
  try:
         # Leer valores de registros de retención
-        holding_register_values = client.execute(slave=1, function_code=4, starting_address=0, quantity_of_x=20)
+        holding = client.execute(slave=1, function_code=4, starting_address=0, quantity_of_x=20)
         
         # Actualizar etiquetas con los nuevos valores
-        dat21.configure(text=holding_register_values[0])
-        dat22.configure(text=holding_register_values[1])
-        dat23.configure(text=holding_register_values[2])
+        dat21.configure(text = holding[0])
+        dat22.configure(text = holding[1])
+        dat23.configure(text = holding[2])
 
  except Exception as e:
         error.config(text= str(e),bg="red")
