@@ -42,11 +42,15 @@ def parar(): #Funcion para detener runtime
     root.destroy()
     client.close()        
 def marcha():
-    client.execute(1, 5, 9, output_value=1)  # Escribir un valor de 1 en la bobina en el esclavo 1, en la dirección 1
+    client.execute(slave=1, function_code=5, starting_adress=9, output_value=1)
+    client.execute(slave=1, function_code=5, starting_adress=9, output_value=0)
     
 def paro():
-    client.execute(1, 5, 9, output_value=0)  # Escribir un valor de 1 en la bobina en el esclavo 1, en la dirección 1
-    
+    client.execute(slave=1, function_code=5, starting_adress=10, output_value=1) 
+
+def rearme():
+    client.execute(slave=1, function_code=5, starting_adress=10, output_value=0)
+
 def pedir_bool(): #Funcion para actualizar los datos en pantalla
     try:
         valor = client.execute(slave=1, function_code= 1, starting_address= 0, quantity_of_x= 20)  #Lee las bobinas correspondientes
@@ -373,7 +377,7 @@ boton_1 = ttk.Button(esc, text="MARCHA",command=marcha)
 boton_1.grid(row=3, column=2, padx=5, sticky="nesw")
 boton_2 = ttk.Button(esc, text="PARO",command=paro)
 boton_2.grid(row=3, column=3, padx=5, sticky="nesw")
-boton_3 = ttk.Button(esc, text="REARME")
+boton_3 = ttk.Button(esc, text="REARME",command=rearme)
 boton_3.grid(row=3, column=4, padx=5, sticky="nesw")
 boton_cerrar = ttk.Button(esc, text="EXIT", command=parar)
 boton_cerrar.grid(row=3, column=5, padx=5, sticky="nesw")
