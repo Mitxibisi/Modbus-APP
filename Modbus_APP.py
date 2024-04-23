@@ -41,6 +41,7 @@ def desconectar():
 def parar(): #Funcion para detener runtime
     root.destroy()
     client.close()        
+
 def marcha():
     client.execute(slave=1, function_code=5, starting_adress=9, output_value=1)
     client.execute(slave=1, function_code=5, starting_adress=9, output_value=0)

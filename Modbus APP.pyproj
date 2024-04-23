@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>163c178c-aab6-4379-a971-da6da465eaa4</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>sinterminar.py</StartupFile>
+    <StartupFile>Modbus_APP.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
