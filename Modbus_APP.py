@@ -1,3 +1,4 @@
+#Librerias
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
@@ -5,10 +6,10 @@ from modbus_tk import modbus_tcp
 import requests
 from io import BytesIO
 
-def agregar_texto(text_widget, texto):
+def agregar_texto(text_widget, texto):#Agrega texto de alarma a la lista
     text_widget.insert(tk.END, texto + "\n")
 
-def borrarlista():
+def borrarlista():#Borra las alarmas de la lista
     alarmas.delete("1.0",tk.END)
     style.map("TNotebook.Tab",
     foreground=[("!selected","black")])
@@ -25,7 +26,7 @@ def conectar():
     
     error.config(bg="lightgreen",text="Sin Error")
   
-  except Exception as e:
+  except Exception as e:#Si aparece error lo almacena y registra
     error.config(text="Error1: " + str(e), bg="red")
     agregar_texto(alarmas,f"Error2: {str(e)}")
     alarmas.config(bg="red")
@@ -42,14 +43,14 @@ def parar(): #Funcion para detener runtime
     root.destroy()
     client.close()        
 
-def marcha():
+def marcha():#Envia un flanco positivo para iniciar la marcha
     client.execute(slave=1, function_code=5, starting_adress=9, output_value=1)
     client.execute(slave=1, function_code=5, starting_adress=9, output_value=0)
     
-def paro():
+def paro():#Envia un paro general
     client.execute(slave=1, function_code=5, starting_adress=10, output_value=1) 
 
-def rearme():
+def rearme():#Desconecta el paro
     client.execute(slave=1, function_code=5, starting_adress=10, output_value=0)
 
 def pedir_bool(): #Funcion para actualizar los datos en pantalla
@@ -75,7 +76,7 @@ def pedir_bool(): #Funcion para actualizar los datos en pantalla
 
     root.after(100, pedir_bool) 
 
-def pedir_holding():
+def pedir_holding():#Lee los holding registers
  try:
         # Leer valores de registros de retención
         holding = client.execute(slave=1, function_code=4, starting_address=0, quantity_of_x=20)
