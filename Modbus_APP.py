@@ -371,9 +371,9 @@ dt20.grid(row=10, column=2, pady=5, padx=8, sticky="nesw")
 
 
 # Defino los botones en runtime
-boton_con = ttk.Button(esc, text="Conectar",command=conectar)
+boton_con = ttk.Button(esc, text="CONECTAR",command=conectar)
 boton_con.grid(row=3, column=0, padx=5, sticky="nesw")
-boton_desc = ttk.Button(esc, text="Desconectar",command=desconectar)
+boton_desc = ttk.Button(esc, text="DESCONECTA R",command=desconectar)
 boton_desc.grid(row=3, column=1, padx=5, sticky="nesw")
 boton_1 = ttk.Button(esc, text="MARCHA",command=marcha)
 boton_1.grid(row=3, column=2, padx=5, sticky="nesw")
