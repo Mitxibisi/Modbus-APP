@@ -1,3 +1,4 @@
+
 #Librerias
 import tkinter as tk
 from tkinter import ttk
@@ -6,10 +7,10 @@ from modbus_tk import modbus_tcp
 import requests
 from io import BytesIO
 
-def agregar_texto(text_widget, texto):#Agrega texto de alarma a la lista
+def agregar_texto(text_widget, texto): #Agrega texto de alarma a la lista
     text_widget.insert(tk.END, texto + "\n")
 
-def borrarlista():#Borra las alarmas de la lista
+def borrarlista(): #Borra las alarmas de la lista
     alarmas.delete("1.0",tk.END)
     style.map("TNotebook.Tab",
     foreground=[("!selected","black")])
@@ -26,22 +27,22 @@ def conectar():
     
     error.config(bg="lightgreen",text="Sin Error")
   
-  except Exception as e:#Si aparece error lo almacena y registra
-    error.config(text="Error1: " + str(e), bg="red")
-    agregar_texto(alarmas,f"Error2: {str(e)}")
+  except Exception as e: #Si aparece error lo almacena y registra
+    error.config(text="ErrorConex: "+ str(e), bg="red")
+    agregar_texto(alarmas,f"ErrorConex: {str(e)}")
     alarmas.config(bg="red")
     style.map("TNotebook.Tab",
               foreground=[("!selected","red")])
   
   finally:
-    client.close()  # Asegurarnos de cerrar la conexión Modbus si hay un error
+    desconectar()  # Asegurarnos de cerrar la conexión Modbus si hay un error
 
 def desconectar():
     client.close()
 
 def parar(): #Funcion para detener runtime
     root.destroy()
-    client.close()        
+    desconectar()        
 
 def marcha():#Envia un flanco positivo para iniciar la marcha
     client.execute(slave=1, function_code=5, starting_address=30, output_value=1)
@@ -54,7 +55,7 @@ def rearme():#Desconecta el paro
     client.execute(slave=1, function_code=5, starting_address=31, output_value=0)
 
 def pedir_bool(): #Funcion para actualizar los datos en pantalla
-    try:
+ try:
         valor = client.execute(slave=1, function_code= 1, starting_address= 0, quantity_of_x= 30)  #Lee las bobinas correspondientes
     
         dat1.config(text="True" if valor[0] else "False", style="OK.TLabel" if valor[0] else "Error.TLabel")
@@ -88,31 +89,31 @@ def pedir_bool(): #Funcion para actualizar los datos en pantalla
         dat32.config(text="True" if valor[28] else "False", style="OK.TLabel" if valor[28] else "Error.TLabel")
         dat33.config(text="True" if valor[29] else "False", style="OK.TLabel" if valor[29] else "Error.TLabel")
         
-    except Exception as e:
-        error.config(text= str(e),bg="red")
-        agregar_texto(alarmas,f"Error4: {str(e)}")
-        alarmas.config(bg="red")
-        style.map("TNotebook.Tab",
-                  foreground=[("!selected","red")])
+ except Exception as e:
+     error.config(text="ErrorBools: "+ str(e),bg="red")
+     agregar_texto(alarmas,f"ErrorBools: {str(e)}")
+     alarmas.config(bg="red")
+     style.map("TNotebook.Tab",
+       foreground=[("!selected","red")])
 
-    root.after(100, pedir_bool) 
+ root.after(100, pedir_bool) 
 
-def pedir_holding():#Lee los holding registers
+def pedir_holding(): #Lee los holding registers
  try:
         # Leer valores de registros de retención
-        holding = client.execute(slave=1, function_code=4, starting_address=0, quantity_of_x=20)
+        holding = client.execute(slave=1, function_code=4, starting_address=0, quantity_of_x=30)
         
         # Actualizar etiquetas con los nuevos valores
-        dat21.configure(text = holding[0])
-        dat22.configure(text = holding[1])
-        dat23.configure(text = holding[2])
+        dat21.configure(text = holding[0],style="General2.TLabel")
+        dat22.configure(text = holding[1],style="General2.TLabel")
+        dat23.configure(text = holding[2],style="General2.TLabel")
 
  except Exception as e:
-        error.config(text= str(e),bg="red")
-        agregar_texto(alarmas,f"Error5: {str(e)}")
+        error.config(text="ErrorHoldings: "+ str(e),bg="red")
+        agregar_texto(alarmas,f"ErrorHoldings: {str(e)}")
         alarmas.config(bg="red")
         style.map("TNotebook.Tab",
-                  foreground=[("!selected","red")])
+          foreground=[("!selected","red")])
 
     # Llamar a la función de actualización nuevamente después de un tiempo
  root.after(200, pedir_holding)
@@ -176,6 +177,13 @@ style.configure("General1.TLabel",
                 padding=4,
                 borderwidth=4,
                 width=6)
+style.configure("General2.TLabel",
+                background="#AED6F1",
+                font=peque2,
+                relief="sunken",
+                padding=4,
+                borderwidth=4,
+                width=6)
 style.configure("Error.TLabel",
                 background="red",
                 font=peque2,
@@ -196,7 +204,9 @@ style.configure("Direccion.TLabel",
                 padding=2,
                 borderwidth=2)
 style.configure("IMAGEN.TLabel",
-                background="#A6ACAF")
+                background="#CACFD2",
+                borderwidth=1,
+                relief="raised")
 style.configure("BOOL.TLabel",
                 background="#AEB6BF",
                 relief="sunken",
@@ -205,11 +215,11 @@ style.configure("BOOL.TLabel",
 style.configure("Marco.TFrame",
                 borderwidth=4,
                 relief="sunken",
-                background="#B3B6B7")
+                background="#AAB7B8")
 style.configure("Marco1.TFrame",
                 borderwidth=4,
                 relief="sunken",
-                background="#A6ACAF")
+                background="#BDC3C7")
 style.configure("TNotebook.Tab",
                 font=panel)
 
@@ -217,13 +227,13 @@ style.configure("TNotebook.Tab",
 url = "https://img.interempresas.net/fotos/4149029.jpeg"
 response = requests.get(url)
 image = Image.open((BytesIO(response.content)))
-image = image.resize((738, 748),Image.Resampling.LANCZOS )
+image = image.resize((734, 748),Image.Resampling.LANCZOS )
 photo = ImageTk.PhotoImage(image)
 
-url1 = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/603px-Amazon_logo.svg.png"
+url1 = "https://www.laudioalde.eus/wp-content/uploads/2020/02/logo.png"
 response1 = requests.get(url1)
 image1 = Image.open((BytesIO(response1.content)))
-image1 = image1.resize((600, 200),Image.Resampling.LANCZOS )
+image1 = image1.resize((720, 200),Image.Resampling.LANCZOS )
 photo1 = ImageTk.PhotoImage(image1)
 
 
@@ -325,13 +335,13 @@ dat33.grid(row=10, column=5, pady=5, padx=5, sticky="nesw")
 
 #Holding registers
 dat21 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat21.grid(row=11, column=0, pady=5, padx=5, sticky="nesw")
+dat21.grid(row=11, column=1, pady=5, padx=5, sticky="nesw")
 dat22 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat22.grid(row=11, column=1, pady=5, padx=5, sticky="nesw")
+dat22.grid(row=11, column=3, pady=5, padx=5, sticky="nesw")
 dat23 = ttk.Label(esc6, text= "",style="General1.TLabel")
-dat23.grid(row=11, column=2, pady=5, padx=5, sticky="nesw")
+dat23.grid(row=11, column=5, pady=5, padx=5, sticky="nesw")
 
-error = tk.Label(esc, text= "", bg= "lightgrey", relief= "flat", bd=4)
+error = tk.Label(esc, text= "¡Hello World!", bg= "#95A5A6", relief= "sunken", bd=5)
 error.grid(row=4, column=0, pady=5, padx=5, columnspan=6, sticky="nesw")
 
 
@@ -376,6 +386,10 @@ dt10 = ttk.Label(esc6,
                  text= "Sh_Auto",
                  style="General.TLabel")
 dt10.grid(row=10, column=0, pady=5, padx=8, sticky="nesw")
+dt32 = ttk.Label(esc6,
+                 text= "Sh_Iron",
+                 style="General.TLabel")
+dt32.grid(row=11, column=0, pady=5, padx=8, sticky="nesw")
 
 dt11 = ttk.Label(esc6,
                  text= "Sh_S4",
@@ -417,6 +431,11 @@ dt20 = ttk.Label(esc6,
                  text= "Sensor D",
                  style="General.TLabel")
 dt20.grid(row=10, column=2, pady=5, padx=8, sticky="nesw")
+dt31 = ttk.Label(esc6,
+                 text= "Sh_Black",
+                 style="General.TLabel")
+dt31.grid(row=11, column=2, pady=5, padx=8, sticky="nesw")
+
 
 dt21 = ttk.Label(esc6,
                  text= "Sh_S5",
@@ -458,6 +477,10 @@ dt30 = ttk.Label(esc6,
                  text= "ExC_DENTRO",
                  style="General.TLabel")
 dt30.grid(row=10, column=4, pady=5, padx=8, sticky="nesw")
+dt33 = ttk.Label(esc6,
+                 text= "Sh_White",
+                 style="General.TLabel")
+dt33.grid(row=11, column=4, pady=5, padx=8, sticky="nesw")
 
 # Defino los botones en runtime
 boton_con = ttk.Button(esc, text="CONECTAR",command=conectar)
@@ -478,6 +501,6 @@ Rex.pack(fill="both",
 
 
 # Definir el cliente Modbus
-client = modbus_tcp.TcpMaster(host="192.168.1.31",port=502)
+client = modbus_tcp.TcpMaster(host="192.168.1.145",port=502)
 
 root.mainloop()  # Ejecutar runtime
