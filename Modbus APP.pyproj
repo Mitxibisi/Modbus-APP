@@ -23,8 +23,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="OLD\antiguo.py" />
-    <Compile Include="OLD\Bool.py" />
-    <Compile Include="OLD\hmi0.py" />
+    <Compile Include="OLD\Pantalla.py" />
+    <Compile Include="OLD\BOOL.py" />
     <Compile Include="cosas.py" />
     <Compile Include="Modbus_APP.py" />
     <Compile Include="OLD\web.py" />
