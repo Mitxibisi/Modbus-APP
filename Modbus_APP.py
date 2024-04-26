@@ -44,18 +44,18 @@ def parar(): #Funcion para detener runtime
     client.close()        
 
 def marcha():#Envia un flanco positivo para iniciar la marcha
-    client.execute(slave=1, function_code=5, starting_adress=9, output_value=1)
-    client.execute(slave=1, function_code=5, starting_adress=9, output_value=0)
+    client.execute(slave=1, function_code=5, starting_address=30, output_value=1)
+    client.execute(slave=1, function_code=5, starting_address=30, output_value=0)
     
 def paro():#Envia un paro general
-    client.execute(slave=1, function_code=5, starting_adress=10, output_value=1) 
+    client.execute(slave=1, function_code=5, starting_address=31, output_value=1) 
 
 def rearme():#Desconecta el paro
-    client.execute(slave=1, function_code=5, starting_adress=10, output_value=0)
+    client.execute(slave=1, function_code=5, starting_address=31, output_value=0)
 
 def pedir_bool(): #Funcion para actualizar los datos en pantalla
     try:
-        valor = client.execute(slave=1, function_code= 1, starting_address= 0, quantity_of_x= 20)  #Lee las bobinas correspondientes
+        valor = client.execute(slave=1, function_code= 1, starting_address= 0, quantity_of_x= 30)  #Lee las bobinas correspondientes
     
         dat1.config(text="True" if valor[0] else "False", style="OK.TLabel" if valor[0] else "Error.TLabel")
         dat2.config(text="True" if valor[1] else "False", style="OK.TLabel" if valor[1] else "Error.TLabel")
@@ -67,6 +67,27 @@ def pedir_bool(): #Funcion para actualizar los datos en pantalla
         dat8.config(text="True" if valor[7] else "False", style="OK.TLabel" if valor[7] else "Error.TLabel")
         dat9.config(text="True" if valor[8] else "False", style="OK.TLabel" if valor[8] else "Error.TLabel")
         dat10.config(text="True" if valor[9] else "False", style="OK.TLabel" if valor[9] else "Error.TLabel")
+        dat11.config(text="True" if valor[10] else "False", style="OK.TLabel" if valor[10] else "Error.TLabel")
+        dat12.config(text="True" if valor[11] else "False", style="OK.TLabel" if valor[11] else "Error.TLabel")
+        dat13.config(text="True" if valor[12] else "False", style="OK.TLabel" if valor[12] else "Error.TLabel")
+        dat14.config(text="True" if valor[13] else "False", style="OK.TLabel" if valor[13] else "Error.TLabel")
+        dat15.config(text="True" if valor[14] else "False", style="OK.TLabel" if valor[14] else "Error.TLabel")
+        dat16.config(text="True" if valor[15] else "False", style="OK.TLabel" if valor[15] else "Error.TLabel")
+        dat17.config(text="True" if valor[16] else "False", style="OK.TLabel" if valor[16] else "Error.TLabel")
+        dat18.config(text="True" if valor[17] else "False", style="OK.TLabel" if valor[17] else "Error.TLabel")
+        dat19.config(text="True" if valor[18] else "False", style="OK.TLabel" if valor[18] else "Error.TLabel")
+        dat20.config(text="True" if valor[19] else "False", style="OK.TLabel" if valor[19] else "Error.TLabel")
+        dat24.config(text="True" if valor[20] else "False", style="OK.TLabel" if valor[20] else "Error.TLabel")
+        dat25.config(text="True" if valor[21] else "False", style="OK.TLabel" if valor[21] else "Error.TLabel")
+        dat26.config(text="True" if valor[22] else "False", style="OK.TLabel" if valor[22] else "Error.TLabel")
+        dat27.config(text="True" if valor[23] else "False", style="OK.TLabel" if valor[23] else "Error.TLabel")
+        dat28.config(text="True" if valor[24] else "False", style="OK.TLabel" if valor[24] else "Error.TLabel")
+        dat29.config(text="True" if valor[25] else "False", style="OK.TLabel" if valor[25] else "Error.TLabel")
+        dat30.config(text="True" if valor[26] else "False", style="OK.TLabel" if valor[26] else "Error.TLabel")
+        dat31.config(text="True" if valor[27] else "False", style="OK.TLabel" if valor[27] else "Error.TLabel")
+        dat32.config(text="True" if valor[28] else "False", style="OK.TLabel" if valor[28] else "Error.TLabel")
+        dat33.config(text="True" if valor[29] else "False", style="OK.TLabel" if valor[29] else "Error.TLabel")
+        
     except Exception as e:
         error.config(text= str(e),bg="red")
         agregar_texto(alarmas,f"Error4: {str(e)}")
@@ -107,7 +128,7 @@ panel=("Arial Black",6,"bold")
 
 root = tk.Tk() # Pantalla
 root.title("DASHBOARD")
-root.geometry("720x760")
+root.geometry("750x760")
 
 panel = ttk.Notebook(root)
 panel.pack()
@@ -196,7 +217,7 @@ style.configure("TNotebook.Tab",
 url = "https://img.interempresas.net/fotos/4149029.jpeg"
 response = requests.get(url)
 image = Image.open((BytesIO(response.content)))
-image = image.resize((710, 748),Image.Resampling.LANCZOS )
+image = image.resize((738, 748),Image.Resampling.LANCZOS )
 photo = ImageTk.PhotoImage(image)
 
 url1 = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/603px-Amazon_logo.svg.png"
@@ -256,6 +277,7 @@ dat9 = ttk.Label(esc6, text= "",style="General1.TLabel")
 dat9.grid(row=9, column=1, pady=5, padx=5, sticky="nesw")
 dat10 = ttk.Label(esc6, text= "",style="General1.TLabel")
 dat10.grid(row=10, column=1, pady=5, padx=5, sticky="nesw")
+
 dat11 = ttk.Label(esc6, text= "",style="General1.TLabel")
 dat11.grid(row=1, column=3, pady=5, padx=5, sticky="nesw")
 dat12 = ttk.Label(esc6, text= "",style="General1.TLabel")
@@ -276,6 +298,32 @@ dat19 = ttk.Label(esc6, text= "",style="General1.TLabel")
 dat19.grid(row=9, column=3, pady=5, padx=5, sticky="nesw")
 dat20 = ttk.Label(esc6, text= "",style="General1.TLabel")
 dat20.grid(row=10, column=3, pady=5, padx=5, sticky="nesw")
+
+dat24 = ttk.Label(esc6, text= "",style="General1.TLabel")
+dat24.grid(row=1, column=5, pady=5, padx=5, sticky="nesw")
+dat25 = ttk.Label(esc6, text= "",style="General1.TLabel")
+dat25.grid(row=2, column=5, pady=5, padx=5, sticky="nesw")
+dat26 = ttk.Label(esc6, text= "",style="General1.TLabel")
+dat26.grid(row=3, column=5, pady=5, padx=5, sticky="nesw")
+dat27 = ttk.Label(esc6, text= "",style="General1.TLabel")
+dat27.grid(row=4, column=5, pady=5, padx=5, sticky="nesw")
+dat28 = ttk.Label(esc6, text= "",style="General1.TLabel")
+dat28.grid(row=5, column=5, pady=5, padx=5, sticky="nesw")
+dat29 = ttk.Label(esc6, text= "",style="General1.TLabel")
+dat29.grid(row=6, column=5, pady=5, padx=5, sticky="nesw")
+dat30 = ttk.Label(esc6, text= "",style="General1.TLabel")
+dat30.grid(row=7, column=5, pady=5, padx=5, sticky="nesw")
+dat31 = ttk.Label(esc6, text= "",style="General1.TLabel")
+dat31.grid(row=8, column=5, pady=5, padx=5, sticky="nesw")
+dat32 = ttk.Label(esc6, text= "",style="General1.TLabel")
+dat32.grid(row=9, column=5, pady=5, padx=5, sticky="nesw")
+dat33 = ttk.Label(esc6, text= "",style="General1.TLabel")
+dat33.grid(row=10, column=5, pady=5, padx=5, sticky="nesw")
+
+
+
+
+#Holding registers
 dat21 = ttk.Label(esc6, text= "",style="General1.TLabel")
 dat21.grid(row=11, column=0, pady=5, padx=5, sticky="nesw")
 dat22 = ttk.Label(esc6, text= "",style="General1.TLabel")
@@ -289,86 +337,127 @@ error.grid(row=4, column=0, pady=5, padx=5, columnspan=6, sticky="nesw")
 
 #Defino los nombres de las etiquetas
 dt1 = ttk.Label(esc6,
-                text= "Bool_Sh_Auto",
+                text= "ExD_Fuera",
                 style="General.TLabel")
 dt1.grid(row=1, column=0, pady=5, padx=8, sticky="nesw")
 dt2 = ttk.Label(esc6,
-                text= "Bool_Sh_Hand",
+                text= "ExI_Fuera",
                 style="General.TLabel")
 dt2.grid(row=2, column=0, pady=5, padx=8, sticky="nesw")
 dt3 = ttk.Label(esc6,
-                text= "Bool_Sh_Pieza",
+                text= "Sensor_IND",
                 style="General.TLabel")
 dt3.grid(row=3, column=0, pady=5, padx=8, sticky="nesw")
 dt4 = ttk.Label(esc6,
-                text= "Bool_Sh_Stack",
+                text= "Sensor_OPT",
                 style="General.TLabel")
 dt4.grid(row=4, column=0, pady=5, padx=8, sticky="nesw")
 dt5 = ttk.Label(esc6,
-                text= "Bool_Sh_Start",
+                text= "ExD_DENTRO",
                 style="General.TLabel")
 dt5.grid(row=5, column=0, pady=5, padx=8, sticky="nesw")
 dt6 = ttk.Label(esc6,
-                text= "Bool_Sh_Stop",
+                text= "ExI_DENTRO",
                 style="General.TLabel")
 dt6.grid(row=6, column=0, pady=5, padx=8, sticky="nesw")
 dt7 = ttk.Label(esc6,
-                text= "Bool_Sh_L_Iron",
+                text= "ExC_FUERA",
                 style="General.TLabel")
 dt7.grid(row=7, column=0, pady=5, padx=8, sticky="nesw")
 dt8 = ttk.Label(esc6,
-                text= "Bool_Sh_L_Black",
+                text= "Sh_S1",
                 style="General.TLabel")
 dt8.grid(row=8, column=0, pady=5, padx=8, sticky="nesw")
 dt9 = ttk.Label(esc6,
-                text= "Bool_Sh_L_White",
+                text= "Sh_S3",
                 style="General.TLabel")
 dt9.grid(row=9, column=0, pady=5, padx=8, sticky="nesw")
 dt10 = ttk.Label(esc6,
-                 text= "Bool_Marcha",
+                 text= "Sh_Auto",
                  style="General.TLabel")
 dt10.grid(row=10, column=0, pady=5, padx=8, sticky="nesw")
+
 dt11 = ttk.Label(esc6,
-                 text= "Bool_Sh_Auto",
+                 text= "Sh_S4",
                  style="General.TLabel")
 dt11.grid(row=1, column=2, pady=5, padx=8, sticky="nesw")
 dt12 = ttk.Label(esc6,
-                 text= "Bool_Sh_Hand",
+                 text= "Sh_S2",
                  style="General.TLabel")
 dt12.grid(row=2, column=2, pady=5, padx=8, sticky="nesw")
 dt13 = ttk.Label(esc6,
-                 text= "Bool_Sh_Pieza",
+                 text= "Sh_START",
                  style="General.TLabel")
 dt13.grid(row=3, column=2, pady=5, padx=8, sticky="nesw")
 dt14 = ttk.Label(esc6,
-                 text= "Bool_Sh_Stack",
+                 text= "Sh_Quit",
                  style="General.TLabel")
 dt14.grid(row=4, column=2, pady=5, padx=8, sticky="nesw")
 dt15 = ttk.Label(esc6,
-                 text= "Bool_Sh_Start",
+                 text= "Sh_Hand",
                  style="General.TLabel")
 dt15.grid(row=5, column=2, pady=5, padx=8, sticky="nesw")
 dt16 = ttk.Label(esc6,
-                 text= "Bool_Sh_Stop",
+                 text= "Fin_Linea",
                  style="General.TLabel")
 dt16.grid(row=6, column=2, pady=5, padx=8, sticky="nesw")
 dt17 = ttk.Label(esc6,
-                 text= "Bool_Sh_L_Iron",
+                 text= "Al_Fuera",
                  style="General.TLabel")
 dt17.grid(row=7, column=2, pady=5, padx=8, sticky="nesw")
 dt18 = ttk.Label(esc6, 
-                 text= "Bool_Sh_L_Black",
+                 text= "Al_Dentro",
                  style="General.TLabel")
 dt18.grid(row=8, column=2, pady=5, padx=8, sticky="nesw")
 dt19 = ttk.Label(esc6,
-                 text= "Bool_Sh_L_White",
+                 text= "Pieza_Alim",
                  style="General.TLabel")
 dt19.grid(row=9, column=2, pady=5, padx=8, sticky="nesw")
 dt20 = ttk.Label(esc6,
-                 text= "Bool_Marcha",
+                 text= "Sensor D",
                  style="General.TLabel")
 dt20.grid(row=10, column=2, pady=5, padx=8, sticky="nesw")
 
+dt21 = ttk.Label(esc6,
+                 text= "Sh_S5",
+                 style="General.TLabel")
+dt21.grid(row=1, column=4, pady=5, padx=8, sticky="nesw")
+dt22 = ttk.Label(esc6,
+                 text= "Sh_S6",
+                 style="General.TLabel")
+dt22.grid(row=2, column=4, pady=5, padx=8, sticky="nesw")
+dt23 = ttk.Label(esc6,
+                 text= "SENSOR_C",
+                 style="General.TLabel")
+dt23.grid(row=3, column=4, pady=5, padx=8, sticky="nesw")
+dt24 = ttk.Label(esc6,
+                 text= "SENSOR_I",
+                 style="General.TLabel")
+dt24.grid(row=4, column=4, pady=5, padx=8, sticky="nesw")
+dt25 = ttk.Label(esc6,
+                 text= "Sensor_ULT",
+                 style="General.TLabel")
+dt25.grid(row=5, column=4, pady=5, padx=8, sticky="nesw")
+dt26 = ttk.Label(esc6,
+                 text= "Sh_STOP",
+                 style="General.TLabel")
+dt26.grid(row=6, column=4, pady=5, padx=8, sticky="nesw")
+dt27 = ttk.Label(esc6,
+                 text= "Sh_L_Iron",
+                 style="General.TLabel")
+dt27.grid(row=7, column=4, pady=5, padx=8, sticky="nesw")
+dt28 = ttk.Label(esc6, 
+                 text= "Sh_L_Black",
+                 style="General.TLabel")
+dt28.grid(row=8, column=4, pady=5, padx=8, sticky="nesw")
+dt29 = ttk.Label(esc6,
+                 text= "Sh_L_White",
+                 style="General.TLabel")
+dt29.grid(row=9, column=4, pady=5, padx=8, sticky="nesw")
+dt30 = ttk.Label(esc6,
+                 text= "ExC_DENTRO",
+                 style="General.TLabel")
+dt30.grid(row=10, column=4, pady=5, padx=8, sticky="nesw")
 
 # Defino los botones en runtime
 boton_con = ttk.Button(esc, text="CONECTAR",command=conectar)
@@ -389,6 +478,6 @@ Rex.pack(fill="both",
 
 
 # Definir el cliente Modbus
-client = modbus_tcp.TcpMaster(host="192.168.1.145",port=502)
+client = modbus_tcp.TcpMaster(host="192.168.1.31",port=502)
 
 root.mainloop()  # Ejecutar runtime
