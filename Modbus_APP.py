@@ -518,6 +518,6 @@ Rec.pack(fill="both",
 
 
 # Definir el cliente Modbus
-client = modbus_tcp.TcpMaster(host="192.168.1.145",port=502)
+client = modbus_tcp.TcpMaster(host="192.168.1.31",port=502)
 
 root.mainloop()  # Ejecutar runtime
