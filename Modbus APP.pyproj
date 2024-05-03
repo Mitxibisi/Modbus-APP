@@ -28,7 +28,6 @@
     <Compile Include="cosas.py" />
     <Compile Include="Modbus_APP.py" />
     <Compile Include="OLD\web.py" />
-    <Compile Include="JK.py" />
     <Compile Include="sinterminar.py" />
   </ItemGroup>
   <ItemGroup>
