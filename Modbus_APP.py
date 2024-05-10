@@ -274,13 +274,13 @@ alarmasrec.pack(fill="both",
             expand=True)
 
 IP = ttk.Entry(Configura)
-IP.pack()
+IP.grid(column=1,row=0)
 PORT = ttk.Entry(Configura)
-PORT.pack()
+PORT.grid(column=1,row=1)
 IP = ttk.Label(Configura,text="Direccion IP:",style="General.TLabel")
-IP.pack()
+IP.grid(column=0,row=0)
 PORT = ttk.Label(Configura,text="PUERTO:",style="General.TLabel")
-PORT.pack()
+PORT.grid(column=0,row=1)
 
 
 # Defino las etiquetas bool en runtime
