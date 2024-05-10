@@ -120,7 +120,7 @@ boton_cerrar = tk.Button(esc, text="CERRAR", width=6, height=1, bg="lightgrey",f
 boton_cerrar.grid(row=10, column=3, padx=4, sticky="ne")
 
 # Definir el cliente Modbus
-client = ModbusTcpClient('192.168.1.145', port=502)
+client = ModbusTcpClient('192.168.1.31', port=502)
 
 try:
     # Intentar conectarse al servidor Modbus
