@@ -1,4 +1,4 @@
-#Proyecto de Fin de Curso - Dashboard de Control para Planta con Modbus
+Proyecto de Fin de Curso - Dashboard de Control para Planta con Modbus
 
 Este proyecto fue desarrollado como parte de mi trabajo de fin de curso y representa mi primera experiencia programando en Python. Se trata de un Dashboard interactivo diseñado para controlar una planta a través de una conexión Modbus, permitiendo la supervisión y gestión de diferentes parámetros.
 
