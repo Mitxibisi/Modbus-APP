@@ -1,5 +1,0 @@
-requests
-pillow
-modbus-tk
-ctypes
-IO

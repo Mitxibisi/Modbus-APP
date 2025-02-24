@@ -58,7 +58,7 @@ def pedir_bool(): #Funcion para actualizar los datos en pantalla
  try:
         valor = client.execute(slave=1, function_code= 1, starting_address= 0, quantity_of_x= 30)  #Lee las bobinas correspondientes
         
-        for index range in value(30):
+        for index in range(30):
             dat[index].config(text="True" if valor[index] else "False", style="OK.TLabel" if valor[index] else "Error.TLabel")
         
  except Exception as e:
@@ -254,13 +254,20 @@ IP.grid(column=0,row=0)
 PORT = ttk.Label(Configura,text="PUERTO:",style="General.TLabel")
 PORT.grid(column=0,row=1)
 
-for index in range value(34):
+# Crear una lista de etiquetas vacía
+dat = []
+
+for index in range(34):
     if index not in (21, 22, 23):
         column = (index // 10) * 2 + 1  # Cada 10 elementos, cambia de columna
         row = (index % 10) + 1  # Mantiene el rango de filas de 1 a 10
-        dat[index] = ttk.Label(datos, text="", style="General1.TLabel")
-        dat[index].grid(row=row, column=column, pady=5, padx=8, sticky="nesw")
-    else continue
+
+        # Crear la etiqueta
+        label = ttk.Label(datos, text="", style="General1.TLabel")
+        label.grid(row=row, column=column, pady=5, padx=8, sticky="nesw")
+
+        # Agregar la etiqueta a la lista
+        dat.append(label)
 
 #Holding registers
 dat21 = ttk.Label(datos, text= "",style="General1.TLabel")
@@ -278,14 +285,17 @@ Labels = ["Sh_ExD_Fuera","Sh_ExI_Fuera","Sh_Sensor_IND","Sh_Sensor_OPT","Sh_ExD_
           "Sh_Fin_Linea","Sh_Al_Fuera","Sh_Al_Dentro","Sh_Pieza_Alim","Sh_Sensor D","Sh_Black","Sh_S5","Sh_S6",
           "Sh_SENSOR_C","Sh_SENSOR_I","Sh_Sensor_ULT","Sh_STOP","Sh_L_Iron","Sh_L_Black","Sh_L_White","Sh_ExC_DENTRO","Sh_White"]
 
-# Diccionario para almacenar las etiquetas dinámicamente
-dat = {}
-
 for index, label_text in enumerate(Labels):
     column = (index // 10) * 2  # Cada 10 elementos, cambia de columna
     row = (index % 10) + 1  # Mantiene el rango de filas de 1 a 10
-    dat[index] = ttk.Label(datos, text=label_text, style="General.TLabel")
-    dat[index].grid(row=row, column=column, pady=5, padx=8, sticky="nesw")
+
+    # Crear la etiqueta
+    label = ttk.Label(datos, text=label_text, style="General.TLabel")
+    label.grid(row=row, column=column, pady=5, padx=8, sticky="nesw")
+
+    # Agregar a la lista
+    dat.append(label)
+
 
 # Defino los botones en runtime
 boton_con = ttk.Button(esc, text="CONECTAR",command=conectar)
